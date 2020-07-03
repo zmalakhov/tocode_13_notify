@@ -11,7 +11,11 @@
                     </div>
 
                     <div class="notify-content">
+                        <!--preloader-->
+                        <preloader v-if="loading" :width="90" :height="90"/>
+                        <!--notify-->
                         <notify
+                                v-if="!loading"
                                 :messages="messages"
                         />
                     </div>
@@ -23,11 +27,14 @@
 
 <script>
     import notify from '@/components/Notify.vue'
+    // UI
+    import preloader from '@/components/UI/Preloader.vue'
 
     export default {
-        components: {notify},
+        components: {notify, preloader},
         data() {
             return {
+                loading: false,
                 messages: [
                     {title: 'message 1'},
                     {title: 'message 2'},
@@ -48,21 +55,24 @@
         align-items: center;
         height: 90vh;
     }
-    .notify__wrapper{
+
+    .notify__wrapper {
         width: 400px;
         background-color: #fff;
         padding: 30px;
         border-radius: 16px;
-        box-shadow: 0 12px 22px rgba(0,0,0,.1);
+        box-shadow: 0 12px 22px rgba(0, 0, 0, .1);
     }
-    .notify-content{
+
+    .notify-content {
         display: flex;
         align-items: center;
         flex-direction: column;
         min-height: 300px;
     }
-    .notify-title{
-        p{
+
+    .notify-title {
+        p {
             font-size: 24px;
         }
     }
