@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import notify from '@/components/Notify.vue'
     // UI
     import preloader from '@/components/UI/Preloader.vue'
@@ -35,14 +36,26 @@
         data() {
             return {
                 loading: false,
-                messages: [
-                    {title: 'message 1'},
-                    {title: 'message 2'},
-                    {title: 'message 3'},
-                    {title: 'message 4'},
-                    {title: 'message 5'},
-                    {title: 'message 6'},
-                ]
+                messages: []
+            }
+        },
+        mounted() {
+            this.getNotify()
+        },
+        methods:{
+            getNotify(){
+                this.loading = true
+                axios
+                    .get('https://tocode.ru/static/c/vue-pro/notifyApi.php')
+                    .then(response => {
+                        let res = response.data.notify
+                        this.messages = res
+                        // console.log(res);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                    .finally( () => {this.loading = false} )
             }
         }
     }
@@ -51,7 +64,7 @@
 <style lang="scss" scoped>
     .container {
         display: flex;
-        justify-content: center;
+        /*justify-content: center;*/
         align-items: center;
         height: 90vh;
     }
