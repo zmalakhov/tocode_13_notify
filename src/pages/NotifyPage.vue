@@ -2,9 +2,20 @@
     <div class="wrapper-content wrapper-content--fixed">
         <section>
             <div class="container">
-                <notify
-                    :messages="messages"
-                />
+                <!--wrapper-->
+                <div class="notify__wrapper">
+                    <!--title-->
+                    <div class="notify-title">
+                        <p>Notify App</p>
+                        <!--svg-->
+                    </div>
+
+                    <div class="notify-content">
+                        <notify
+                                :messages="messages"
+                        />
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -12,23 +23,48 @@
 
 <script>
     import notify from '@/components/Notify.vue'
+
     export default {
-        components: { notify },
-        data(){
-            return{
+        components: {notify},
+        data() {
+            return {
                 messages: [
-                    { title: 'message 1' },
-                    { title: 'message 2' },
-                    { title: 'message 3' },
-                    { title: 'message 4' },
-                    { title: 'message 5' },
-                    { title: 'message 6' },
+                    {title: 'message 1'},
+                    {title: 'message 2'},
+                    {title: 'message 3'},
+                    {title: 'message 4'},
+                    {title: 'message 5'},
+                    {title: 'message 6'},
                 ]
             }
         }
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+    }
+    .notify__wrapper{
+        width: 400px;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 12px 22px rgba(0,0,0,.1);
+    }
+    .notify-content{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        min-height: 300px;
+    }
+    .notify-title{
+        p{
+            font-size: 24px;
+        }
+    }
 
 </style>
