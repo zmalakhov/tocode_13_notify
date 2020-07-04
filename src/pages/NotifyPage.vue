@@ -18,11 +18,15 @@
                     <div class="notify-content">
                         <!--preloader-->
                         <preloader v-if="loading" :width="90" :height="90"/>
+
+                        <!--error-->
+                        <div class="error" v-if="error">
+                            <p>{{ error }}</p>
+                        </div>
+
                         <!--notify-->
                         <notify
-                                v-if="!loading"
-                                :messages="messages"
-                        />
+                                v-if="!loading && !error" :messages="messages"/>
                     </div>
                 </div>
             </div>
@@ -41,7 +45,7 @@
         data() {
             return {
                 loading: false,
-
+                error: null
             }
         },
         mounted() {
@@ -56,7 +60,7 @@
             getNotify() {
                 this.loading = true
                 axios
-                    .get('https://tocode.ru/static/c/vue-pro/notifyApi.php')
+                    .get('https://tocode.ru/static/c/vue-pro/notifyApi.php1')
                     .then(response => {
                         let res = response.data.notify,
                             messages = [],
@@ -75,6 +79,7 @@
                     })
                     .catch(error => {
                         console.log(error);
+                        this.error = 'Error: network error'
                     })
                     .finally(() => {
                         this.loading = false
