@@ -60,7 +60,7 @@
             getNotify() {
                 this.loading = true
                 axios
-                    .get('https://tocode.ru/static/c/vue-pro/notifyApi.php1')
+                    .get('https://tocode.ru/static/c/vue-pro/notifyApi.php')
                     .then(response => {
                         let res = response.data.notify,
                             messages = [],
@@ -92,7 +92,7 @@
 <style lang="scss" scoped>
     .container {
         display: flex;
-        /*justify-content: center;*/
+        justify-content: center;
         align-items: center;
         height: 90vh;
     }
